@@ -1,15 +1,16 @@
 #pragma once
+#include "Render.h"
+#include "Tick.h"
+#include "Input.h"
 
-enum Input
+class Engine
 {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    SUBMIT,
-};
+public:
+	void Init();
+	void Update();
 
-void gotoxy(int x, int y);
-int KeyControl();
-void init();
-void setColor(int forground, int background);
+public:
+	Tick* _Tick = new Tick;
+	Render* _Render = new Render;
+	Input* _Input = new Input;
+};
