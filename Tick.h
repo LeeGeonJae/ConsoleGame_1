@@ -17,4 +17,3 @@ public:
     int updateCount;
     int fixedUpdateCount;
 };
-

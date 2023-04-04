@@ -5,17 +5,17 @@ using namespace std;
 
 void Tick::InitTime()
 {
-	currentTime = previousTime = GetTickCount64();
+    currentTime = previousTime = GetTickCount64();
     updateCount = 0;
     fixedUpdateCount = 0;
 }
 
 void Tick::UpdateTime()
 {
-	previousTime = currentTime;
-	currentTime = GetTickCount64();
+    previousTime = currentTime;
+    currentTime = GetTickCount64();
 
-	deltaTime = currentTime - previousTime;
+    deltaTime = currentTime - previousTime;
     updateCount += 1;
 }
 
@@ -26,7 +26,7 @@ void Tick::FixedUpdate()
 
     elapsedTime += GetDeltaTime();
 
-    while (elapsedTime >= 200) //0.1√ 
+    while (elapsedTime >= 100) //0.1√ 
     {
         fixedUpdateCount += 1;
 

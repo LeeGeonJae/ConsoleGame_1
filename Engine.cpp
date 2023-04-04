@@ -12,7 +12,7 @@ void Engine::Update()
 {
 	_Input->UpdateInput();
 	_Tick->FixedUpdate();
-	_Render->Update(_Tick);
 	_Tick->UpdateTime();
+	_Render->Update(_Tick, _Input);
 	//_Render->PrintCountsPerSecond(_Tick, _Input);
 }
