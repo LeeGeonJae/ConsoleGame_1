@@ -1,12 +1,13 @@
 #pragma once
 #include <windows.h>
+#include "Input.h"
 
 class Tick
 {
 public:
     void InitTime();
     void UpdateTime();
-    void FixedUpdate();
+    void FixedUpdate(Input* _Input);
     ULONGLONG GetDeltaTime() { return deltaTime; }
 
 public:
@@ -16,4 +17,8 @@ public:
 
     int updateCount;
     int fixedUpdateCount;
+
+    int FixedCount;
+    bool PlayerMove = true;
+    bool FirstInput = true;
 };

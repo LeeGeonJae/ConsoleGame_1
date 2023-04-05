@@ -23,7 +23,7 @@ public:
 	bool IsRightCmdOn();
 	bool IsUpCmdOn();
 	bool IsDownCmdOn();
-	void UpdateInput();
+	void UpdateInput(bool* Input);
 
 public:
 	bool inputKeyTable[MAX_KEY];

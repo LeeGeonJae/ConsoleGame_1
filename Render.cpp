@@ -20,7 +20,7 @@ void Render::Update(Tick* _Tick, Input* _Input)
             if (_Stage->y == 15)
             {
                 _Stage->y = 15;
-                GameNumber = 1;
+                GameNumber = 2;
                 system("cls");
             }
             else if (_Stage->y == 16)
@@ -38,16 +38,24 @@ void Render::Update(Tick* _Tick, Input* _Input)
             Sleep(150);
         }
     }
-    else if (GameNumber == 1)                                                   // 스테이지1으로 이동
+    else if (GameNumber == 2)                                                   // 스테이지1으로 이동
     {
-        _Stage->StageOne(_Input);
-
+        _Stage->StageOne(_Input, _Tick, &GameNumber);
+    }
+    else if (GameNumber == 3)
+    {
+        _Stage->StageTwo(_Input, _Tick, &GameNumber);                           // 스테이지2으로 이동
+    }
+    else if (GameNumber == 4)
+    {
+        _Stage->StageThree(_Input, _Tick, &GameNumber);                         // 스테이지3으로 이동
     }
     else if (GameNumber == 100)                                                 // 게임 정보란으로 이동
     {
         _Stage->GameInformation(_Input);
 
-        if (_Input->IsSpaceCmdOn())                                             // 게임 정보란에서 스페이스바를 누르면 다시 돌아오기
+        // 게임 정보란에서 스페이스바를 누르면 다시 돌아오기
+        if (_Input->IsSpaceCmdOn())                                             
         {
             _Input->Set(ESCAPE_KEY_INDEX, false);
             system("cls");
@@ -59,11 +67,20 @@ void Render::Update(Tick* _Tick, Input* _Input)
         }
     }
 
+    if (_Stage->_word->GameNumber == 101)                                       // 플레이 도중 게임이 오버되면 실행
+    {
+        _Stage->GameOver(_Input, &GameNumber);
+        _Stage->_word->GameNumber = 0;
+    }
+    else if (GameNumber == 102)
+    {
+
+    }
 
     narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
 }
 
-// 1초마다 실행되어 화면에 출력하는 함수
+// 1초마다 실행되어 화면에 출력하는 함수 ( 테스트 용이라 필요하진 않음 )
 void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
 {
     static ULONGLONG elapsedTime;
@@ -108,13 +125,14 @@ void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
     }
 }
 
+// 나레이션 출력하는 함수
 void Render::narration(const char* narration, Tick* _Tick, Input* _Input, int num)
 {
     static int x = 35;
     static int y = 24;
 
     // NarrationReset : 맵이 달라지면 나레이션 초기화 하고 다음 스테이지의 나레이션으로 초기 세팅
-    if (narrationReset)
+    if (narrationReset || _Stage->Once == false)
     {
         narrationCount = 0;
         narrationNext = 0;
@@ -142,10 +160,12 @@ void Render::narration(const char* narration, Tick* _Tick, Input* _Input, int nu
             _Input->Gotoxy(2, 26);
             cout << "#############################################################################";
 
+            // 나레이션 커서를 이동시키고 FixedUpdateCount가 1씩 증가할 때마다 출력이 되니 fixedUpdateCount의 수만큼 오른쪽으로 이동해서 단어 출력
             _Input->Gotoxy(x + _Tick->fixedUpdateCount - strlen(_narration) / 2, y);
             cout << _narration[_Tick->fixedUpdateCount - 1];
             narrationCount = _Tick->fixedUpdateCount;
 
+            // 단어의 길이가 fixedUpdateCount만큼 같아진다면 출력을 그만하기
             if (strlen(_narration) == _Tick->fixedUpdateCount)
                 narrationStop = false;
 

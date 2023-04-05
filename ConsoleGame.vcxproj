@@ -146,6 +146,7 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Tick.cpp" />
+    <ClCompile Include="Word.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Render.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Tick.h" />
+    <ClInclude Include="Word.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

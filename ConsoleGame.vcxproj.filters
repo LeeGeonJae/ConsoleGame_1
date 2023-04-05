@@ -16,6 +16,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{81c0c35e-94a4-498b-b63e-951fe01c84e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGame.cpp">
@@ -30,14 +33,17 @@
     <ClCompile Include="Tick.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Word.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,14 +56,17 @@
     <ClInclude Include="Tick.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Word.h">
+      <Filter>Object</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Engine</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
