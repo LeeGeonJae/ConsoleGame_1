@@ -21,7 +21,7 @@ int main()
     system("cls");
 
     _Engine->_Input->Gotoxy(10, 5);
-    cout << "게임을 종료하셨습니다" << endl;
+    cout << "                    게임을 종료하셨습니다                    " << endl;
 
     return 0;
 }

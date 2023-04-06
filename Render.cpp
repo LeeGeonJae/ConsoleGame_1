@@ -10,13 +10,15 @@ void Render::Init()
 
 void Render::Update(Tick* _Tick, Input* _Input)
 {
-    if (GameNumber == 0)                                                        // Menu
+    if (GameNumber == 0)                                                                                    // Menu
     {
         _Stage->Menu(_Input);
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
 
-        if (_Input->IsSpaceCmdOn())                                             // Space bar를 누르면 해당 항목 선택
+        if (_Input->IsSpaceCmdOn())                                                                         // Space bar를 누르면 해당 항목 선택
         {
             _Input->Set(ESCAPE_KEY_INDEX, false);
+
             if (_Stage->y == 15)
             {
                 _Stage->y = 15;
@@ -38,24 +40,37 @@ void Render::Update(Tick* _Tick, Input* _Input)
             Sleep(150);
         }
     }
-    else if (GameNumber == 2)                                                   // 스테이지1으로 이동
+    else if (GameNumber == 2)                                                                               // 스테이지1으로 이동
     {
         _Stage->StageOne(_Input, _Tick, &GameNumber);
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);
     }
     else if (GameNumber == 3)
     {
-        _Stage->StageTwo(_Input, _Tick, &GameNumber);                           // 스테이지2으로 이동
+        _Stage->StageTwo(_Input, _Tick, &GameNumber);                                                       // 스테이지2으로 이동
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);
     }
     else if (GameNumber == 4)
     {
-        _Stage->StageThree(_Input, _Tick, &GameNumber);                         // 스테이지3으로 이동
+        _Stage->StageThree(_Input, _Tick, &GameNumber);                                                     // 스테이지3으로 이동
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
     }
-    else if (GameNumber == 100)                                                 // 게임 정보란으로 이동
+    else if (GameNumber == 5)
+    {
+        _Stage->StageFour(_Input, _Tick, &GameNumber);                                                      // 스테이지4으로 이동
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
+    }
+    else if (GameNumber == 6)
+    {
+        _Stage->StageFive(_Input, _Tick, &GameNumber);                                                      // 스테이지5으로 이동
+        narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
+    }
+    else if (GameNumber == 100)                                                                             // 게임 정보란으로 이동
     {
         _Stage->GameInformation(_Input);
 
         // 게임 정보란에서 스페이스바를 누르면 다시 돌아오기
-        if (_Input->IsSpaceCmdOn())                                             
+        if (_Input->IsSpaceCmdOn())
         {
             _Input->Set(ESCAPE_KEY_INDEX, false);
             system("cls");
@@ -77,7 +92,6 @@ void Render::Update(Tick* _Tick, Input* _Input)
 
     }
 
-    narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
 }
 
 // 1초마다 실행되어 화면에 출력하는 함수 ( 테스트 용이라 필요하진 않음 )
@@ -147,7 +161,7 @@ void Render::narration(const char* narration, Tick* _Tick, Input* _Input, int nu
     }
 
     // 인자에 받은 나레이션의 배열값을 가져와서 복사하기
-    if (num != narrationNext && narrationStop == true)
+    if (num != narrationNext && narrationStop == true && narration != nullptr)
     {
         strcpy_s(_narration, narration);
 
@@ -155,10 +169,12 @@ void Render::narration(const char* narration, Tick* _Tick, Input* _Input, int nu
         if (narrationCount != _Tick->fixedUpdateCount)
         {
             // 나레이션 대화창 만들기
+            _Stage->SetColor(black, white);
             _Input->Gotoxy(2, 22);
             cout << "#############################################################################";
             _Input->Gotoxy(2, 26);
             cout << "#############################################################################";
+            _Stage->SetColor(white, black);
 
             // 나레이션 커서를 이동시키고 FixedUpdateCount가 1씩 증가할 때마다 출력이 되니 fixedUpdateCount의 수만큼 오른쪽으로 이동해서 단어 출력
             _Input->Gotoxy(x + _Tick->fixedUpdateCount - strlen(_narration) / 2, y);

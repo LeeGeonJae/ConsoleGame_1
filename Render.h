@@ -14,7 +14,7 @@ public:
 
 public:
 	Stage* _Stage = new Stage;
-	int GameNumber = 0;
+	int GameNumber = 6;
 
 public:
 	// 나레이션 관련 변수들

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="ConsoleGame.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Eremy.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Render.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Eremy.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />

@@ -17,6 +17,7 @@ public:
 
     int updateCount;
     int fixedUpdateCount;
+    int fixedEnemyCount;
 
     int FixedCount;
     bool PlayerMove = true;

@@ -18,14 +18,19 @@ void Stage::Menu(Input* _Input)
 	narrationarr[4] = "I hope you play a good game";
 
 	// 게임 타이틀 제목
-	_Input->Gotoxy(1, 4);
-	cout << "    #     #                         #     # ###                           " << endl;
-	cout << "     #  #  #  ####  #####  #####     #  #  #  #  ######   ##   #####  #####     " << endl;
-	cout << "     #  #  # #    # #    # #    #    #  #  #  #      #   #  #  #    # #    #    " << endl;
-	cout << "     #  #  # #    # #    # #    #    #  #  #  #     #   #    # #    # #    #    " << endl;
-	cout << "     #  #  # #    # #####  #    #    #  #  #  #    #    ###### #####  #    #    " << endl;
-	cout << "     #  #  # #    # #   #  #    #    #  #  #  #   #     #    # #   #  #    #    " << endl;
-	cout << "      ## ##   ####  #    # #####      ## ##  ### ###### #    # #    # #####     " << endl;
+	_Input->Gotoxy(0, 3);
+
+	SetColor(white, white);
+	cout << "                                                                               " << endl << endl; SetColor(white, black);
+	cout << "     #     #                         #     # ###                               " << endl;
+	cout << "     #  #  #: ####  #####  #####     #  #  #  #  ######   ##   #####  #####    " << endl;
+	cout << "     #  #  # #    # #    # #    #    #  #  #  #      #   #  #  #    # #    #   " << endl;
+	cout << "     #  #  # #    # #    # #    #    #  #  #  #     #   #    # #    # #    #   " << endl;
+	cout << "     #  #  # #    # #####  #    #    #  #  #  #    #    ###### #####  #    #   " << endl;
+	cout << "     #  #  # #    # #    # #    #    #  #  #  #   #     #    # #   #  #    #   " << endl;
+	cout << "      ## ##   ####  #    # #####      ## ##  ### ###### #    # #    # #####    " << endl << endl; SetColor(white, white);
+	cout << "                                                                               " << endl;
+	SetColor(white, black);
 
 	// 게임 처음 세팅
 	if (Once == false)
@@ -74,7 +79,12 @@ void Stage::Menu(Input* _Input)
 // 게임 오버
 void Stage::GameOver(Input* _Input, int* GameNumber)
 {
-	cout << "당신은 죽으셨습니다 5초 후에 메뉴로 돌아갑니다" << endl;
+	system("cls");
+	_Input->Gotoxy(0, 10);
+	SetColor(white, white);
+	cout << "#############################################################################" << endl; SetColor(white, black);
+	cout << "               당신은 죽으셨습니다 5초 후에 메뉴로 돌아갑니다                " << endl; SetColor(white, white);
+	cout << "#############################################################################" << endl;
 
 	Sleep(5000);
 	system("cls");
@@ -93,13 +103,13 @@ void Stage::GameInformation(Input* _Input)
 
 		_Input->Gotoxy(1, 4);
 		cout << "\n\n";
-		cout << "  --게임인재원 5기 프로그래밍 학과 미니 콘솔 게임 프로젝트--    " << endl;
-		cout << "                    [ 조 작 법 ]                          " << endl;
-		cout << "                 이 동 : W, A, S, D                       " << endl;
-		cout << "                 선 택 : 스페이스 바                       " << endl;
-		cout << "              개 발 자 : Lee Geon Jae                     " << endl << endl;
-		cout << "      이 게임은 baba is you를 모티브로 만들어졌습니다         " << endl;
-		cout << "       스페이스 바를 누르면 메인 화면으로 돌아갑니다          " << endl;
+		cout << "            --게임인재원 5기 프로그래밍 학과 미니 콘솔 게임 프로젝트--    " << endl;
+		cout << "                               [ 조 작 법 ]                          " << endl;
+		cout << "                            이 동 : W, A, S, D                       " << endl;
+		cout << "                         선택 및 리셋 : 스페이스 바                       " << endl;
+		cout << "                          개 발 자 : Lee Geon Jae                     " << endl << endl;
+		cout << "                 이 게임은 baba is you를 모티브로 만들어졌습니다         " << endl;
+		cout << "                  스페이스 바를 누르면 메인 화면으로 돌아갑니다          " << endl;
 	}
 }
 
@@ -152,6 +162,51 @@ void Stage::StageThree(Input* _Input, Tick* _Tick, int* GameNumber)
 	SettingMap(_Input, _Tick, GameNumber, StageThreeMap);
 }
 
+void Stage::StageFour(Input* _Input, Tick* _Tick, int* GameNumber)
+{
+	// 나레이션 배열 갯수
+	Narrationarrlen = 5;
+
+	// 나레이션 쓰기 ( 영어만 가능 )
+	narrationarr[0] = "Oh! I think that's the enemy!";
+	narrationarr[1] = "That's running towards GOAL!";
+	narrationarr[2] = "You need to stop them from reaching GOAL!";
+	narrationarr[3] = "'*' Shapes won't stop that!";
+	narrationarr[4] = "you should find the opposite meaning of \'OPEN\'!";
+
+	if (Once == false)
+	{
+		_Eremy->Init(5, 12, _Input);
+	}
+
+	_Eremy->Move(tempMap, _Tick, _Input);
+
+	SettingMap(_Input, _Tick, GameNumber, StageFourMap);
+}
+
+void Stage::StageFive(Input* _Input, Tick* _Tick, int* GameNumber)
+{
+	// 나레이션 배열 갯수
+	Narrationarrlen = 5;
+
+	// 나레이션 쓰기 ( 영어만 가능 )
+	narrationarr[0] = "Oh! I think that's the enemy!";
+	narrationarr[1] = "That's running towards GOAL!";
+	narrationarr[2] = "You need to stop them from reaching GOAL!";
+	narrationarr[3] = "'*' Shapes won't stop that!";
+	narrationarr[4] = "you should find the opposite meaning of \'OPEN\'!";
+
+	SettingMap(_Input, _Tick, GameNumber, StageFiveMap);
+}
+
+// 색 지정하기
+void Stage::SetColor(int forground, int background)
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	int code = forground + background * 16;
+	SetConsoleTextAttribute(consoleHandle, code);
+}
+
 // 맵 그리기
 void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 {
@@ -163,16 +218,38 @@ void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 			// 만약 해당 좌표에 플레이어가 있으면 다시 그리지 않기
 			if (_player->PlayerCurrentPosition.X == w && _player->PlayerCurrentPosition.Y == h)
 				continue;
+			if (_Eremy->EremyCurrentPosition.X == w && _Eremy->EremyCurrentPosition.Y == h && _Eremy->Delete != true)
+				continue;
 
 			// 해당 좌표에 가서 맵 그리기
 			_Input->Gotoxy(w, h);
 			char temp = Map[h][w];
-			if (temp == '0')
+			if (temp == '0')					// 빈 공간
 				cout << " ";
-			else if (temp == '1')
-				cout << "■";
-			else if (temp == '2')
-				cout << "＊";
+			else if (temp == '1')				// Wall
+				cout << "#";
+			else if (temp == '2')				// Closed Door
+				cout << "*";
+			else if (temp == '3')				// Closed Door (2) 
+				cout << "ㅁ";
+			else if (temp == 'r')				// RED
+			{
+				SetColor(red, red);
+				cout << " ";
+				SetColor(white, black);
+			}
+			else if (temp == 'b')				// BLUE
+			{
+				SetColor(blue, blue);
+				cout << " ";
+				SetColor(white, black);
+			}
+			else if (temp == 'y')				// YELLOW
+			{
+				SetColor(yellow, yellow);
+				cout << " ";
+				SetColor(white, black);
+			}
 			else if (temp == 'G')
 				cout << "G";
 			else if (temp == 'W')
@@ -189,6 +266,20 @@ void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 				cout << "E";
 			else if (temp == 'N')
 				cout << "N";
+			else if (temp == 'C')
+				cout << "C";
+			else if (temp == 'S')
+				cout << "S";
+			else if (temp == 'B')
+				cout << "B";
+			else if (temp == 'U')
+				cout << "U";
+			else if (temp == 'R')
+				cout << "R";
+			else if (temp == 'D')
+				cout << "D";
+			else if (temp == 'Y')
+				cout << "Y";
 		}
 	}
 }
@@ -235,7 +326,7 @@ void Stage::SettingMap(Input* _Input, Tick* _Tick, int* GameNumber, char map[][8
 		system("cls");
 		(*GameNumber)++;
 
-		if (*GameNumber == 5)
+		if (*GameNumber == 7)
 			*GameNumber = 0;
 	}
 

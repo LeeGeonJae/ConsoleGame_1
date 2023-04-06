@@ -18,7 +18,7 @@ void Player::DrawPlayer(Input* _Input)
 	_Input->Gotoxy(PlayerCurrentPosition.X, PlayerCurrentPosition.Y);
 	std::cout << " ";
 	_Input->Gotoxy(PlayerNextPosition.X, PlayerNextPosition.Y);
-	std::cout << "●";
+	std::cout << "@";
 }
 
 // PlayerNextPosition이 '0'이면 이동, 아니면 가만히
@@ -89,7 +89,7 @@ void Player::Move(char map[][80], Input* _Input, Tick* _Tick, Word* _Word)
 		else
 			PlayerNextPosition.X = PlayerCurrentPosition.X;
 	}
-	
+
 	// A키 입력
 	if (_Input->IsLeftCmdOn() && _Tick->PlayerMove)
 	{
@@ -126,7 +126,14 @@ bool Player::CanMove(char map[][80], Input* _Input, Word* _Word)
 		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'O'
 		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'P'
 		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'E'
-		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'N')
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'N'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'C'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'S'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'B'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'U'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'R'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'D'
+		|| map[PlayerNextPosition.Y][PlayerNextPosition.X] == 'Y')
 	{
 		return CanMoveWord(map, _Input, _Word);
 	}

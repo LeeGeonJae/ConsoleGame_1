@@ -8,6 +8,7 @@ void Tick::InitTime()
     currentTime = previousTime = GetTickCount64();
     updateCount = 0;
     fixedUpdateCount = 0;
+    fixedEnemyCount = 0;
     FixedCount = 0;
 }
 
@@ -31,6 +32,7 @@ void Tick::FixedUpdate(Input* _Input)
     {
         fixedUpdateCount += 1;
         FixedCount++;
+        fixedEnemyCount += 1;
         elapsedTime = 0;
 
         // 플레이어가 이동하는 중이면 실행
