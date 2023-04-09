@@ -17,7 +17,7 @@ void Input::Init()
 
 void Input::Set(const int keyIdx, bool bOn)
 {
-	//assert(keyIdx >= 0 && keyIdx < MAX_KEY); // 방어 코드를 작성하는 것에 익숙해져야 합니다.  배열을 다룰 때는 인덱스를 조심해야 합니다!!
+	assert(keyIdx >= 0 && keyIdx < MAX_KEY); // 방어 코드를 작성하는 것에 익숙해져야 합니다.  배열을 다룰 때는 인덱스를 조심해야 합니다!!
 
 	inputKeyTable[keyIdx] = bOn;			// bool 타입을 활용 합시다.
 }

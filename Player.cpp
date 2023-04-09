@@ -16,9 +16,9 @@ void Player::Init(int x, int y, Input* _Input)
 void Player::DrawPlayer(Input* _Input)
 {
 	_Input->Gotoxy(PlayerCurrentPosition.X, PlayerCurrentPosition.Y);
-	std::cout << " ";
+	std::wcout << " ";
 	_Input->Gotoxy(PlayerNextPosition.X, PlayerNextPosition.Y);
-	std::cout << "@";
+	std::wcout << "@";
 }
 
 // PlayerNextPosition이 '0'이면 이동, 아니면 가만히
@@ -161,12 +161,12 @@ bool Player::CanMoveWord(char map[][80], Input* _Input, Word* _Word)
 	// 맵에 플레이어의 다음 좌표를 빈 공간으로 바꾸고 " "으로 출력
 	map[PlayerNextPosition.Y][PlayerNextPosition.X] = '0';
 	_Input->Gotoxy(PlayerNextPosition.X, PlayerNextPosition.Y);
-	std::cout << " ";
+	std::wcout << " ";
 
 	// 문자가 움직일 다음 좌표에 저장된 문자를 맵의 해당 좌표에 저장하고 해당 좌표에 문자 출력
 	map[PlayerNextPosition.Y + WordPosition.Y][PlayerNextPosition.X + WordPosition.X] = temp;
 	_Input->Gotoxy((PlayerNextPosition.X + WordPosition.X), (PlayerNextPosition.Y + WordPosition.Y));
-	std::cout << temp;
+	std::wcout << temp;
 
 	// 문자가 이동하는데 성공했으면 마지막으로 그 줄에 있는 문자들을 체크하는 함수 실행
 	_Word->ChecktheWord(map, PlayerNextPosition.Y + WordPosition.Y);

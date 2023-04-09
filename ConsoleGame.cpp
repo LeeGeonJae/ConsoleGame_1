@@ -2,6 +2,8 @@
 #include <iostream>
 #include <Windows.h>
 #include "Engine.h"
+#include <io.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -21,7 +23,7 @@ int main()
     system("cls");
 
     _Engine->_Input->Gotoxy(10, 5);
-    cout << "                    게임을 종료하셨습니다                    " << endl;
+    wcout << "                    게임을 종료하셨습니다                    " << endl;
 
     return 0;
 }

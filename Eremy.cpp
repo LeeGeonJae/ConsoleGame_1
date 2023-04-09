@@ -10,9 +10,9 @@ void Eremy::Init(int x, int y, Input* _Input)
 	DrawEremy(_Input);
 }
 
-void Eremy::Move(char map[][80], Tick* _Tick, Input* _Input)
+void Eremy::Move(char map[][80], Tick* _Tick, Input* _Input, int Speed)
 {
-	if (_Tick->fixedEnemyCount == 5 && Delete != true)
+	if (_Tick->fixedEnemyCount >= Speed && Delete != true)
 	{
 		EremyNextPosition.X += 1;
 
@@ -23,9 +23,9 @@ void Eremy::Move(char map[][80], Tick* _Tick, Input* _Input)
 			map[EremyNextPosition.Y][EremyNextPosition.X] = '0';
 			Delete = true;
 			_Input->Gotoxy(EremyCurrentPosition.X, EremyCurrentPosition.Y);
-			std::cout << " ";
+			std::wcout << " ";
 			_Input->Gotoxy(EremyNextPosition.X, EremyNextPosition.Y);
-			std::cout << " ";
+			std::wcout << " ";
 		}
 		else
 		{
@@ -40,7 +40,7 @@ void Eremy::Move(char map[][80], Tick* _Tick, Input* _Input)
 void Eremy::DrawEremy(Input* _Input)
 {
 	_Input->Gotoxy(EremyCurrentPosition.X, EremyCurrentPosition.Y);
-	std::cout << " ";
+	std::wcout << L" ";
 	_Input->Gotoxy(EremyNextPosition.X, EremyNextPosition.Y);
-	std::cout << "ή¦";
+	std::wcout << L"Έχ";
 }

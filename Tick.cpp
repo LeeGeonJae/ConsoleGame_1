@@ -28,11 +28,12 @@ void Tick::FixedUpdate(Input* _Input)
 
     elapsedTime += GetDeltaTime();
 
-    while (elapsedTime >= 100) //0.1초
+    while (elapsedTime >= 70) //0.1초
     {
         fixedUpdateCount += 1;
         FixedCount++;
         fixedEnemyCount += 1;
+        Score -= 1;
         elapsedTime = 0;
 
         // 플레이어가 이동하는 중이면 실행
