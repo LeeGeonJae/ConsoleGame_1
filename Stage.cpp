@@ -210,7 +210,7 @@ void Stage::StageFour(Input* _Input, Tick* _Tick, int* GameNumber)
 
 	// 나레이션 쓰기 ( 영어만 가능 )
 	narrationarr[0] = L"오! 저 맵 아래에 존재하는 것은 뭐지?";
-	narrationarr[1] = L"저건 다음 스테이지로 통하는 통로를 행해 달리고 있어!";
+	narrationarr[1] = L"저건 다음 스테이지로 통하는 통로를 향해 달리고 있어!";
 	narrationarr[2] = L"무슨 일이 벌어질지는 몰라도 막아야 될 것 같아!";
 	narrationarr[3] = L"일반 \'*\'모양은 저것을 막을 수 없어!";
 	narrationarr[4] = L"저 별모양을 바꿔서 저것을 막아야 해!";
@@ -307,6 +307,7 @@ void Stage::GoodEnging(Input* _Input, Tick* _Tick, int* GameNumber, int PlayTime
 
 	if(Once == false)
 	{
+		_Input->Gotoxy(1, 1);
 		Once = true;
 		wcout << L"\n\n\n"; SetColor(lightgreen, black);
 		wcout << L"                                                       PlayTime : " << PlayTime << "\n\n\n"; SetColor(white, black);
@@ -368,7 +369,7 @@ void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 			}
 			else if (temp == 'b')				// BLUE
 			{
-				SetColor(blue, black);
+				SetColor(lightblue, black);
 				wcout << "b";
 				SetColor(white, black);
 			}
@@ -454,8 +455,8 @@ void Stage::SettingMap(Input* _Input, Tick* _Tick, int* GameNumber, char map[][8
 		system("cls");
 		(*GameNumber)++;
 
-		if (*GameNumber == 10)
-			*GameNumber = 0;
+		//if (*GameNumber == 10)
+		//	*GameNumber = 0;
 	}
 
 	// Space bar를 누르면 맵 다시 시작

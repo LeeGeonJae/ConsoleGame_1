@@ -175,7 +175,7 @@ void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
                 for (int j = 0; j < 26; j++)
                 {
                     _Input->Gotoxy(senzX + j, senzY + i);
-                    _Stage->SetColor(blue, black);
+                    _Stage->SetColor(lightblue, black);
                     tempSenz = Senz1[i][j];
                     wcout << tempSenz;
                     _Stage->SetColor(white, black);
@@ -190,7 +190,7 @@ void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
                 for (int j = 0; j < 26; j++)
                 {
                     _Input->Gotoxy(senzX + j, senzY + i);
-					_Stage->SetColor(blue, black);
+					_Stage->SetColor(lightblue, black);
                     wcout << Senz2[i][j];
                     _Stage->SetColor(white, black);
                 }
@@ -253,12 +253,12 @@ void Render::narration(const wchar_t* narration, Tick* _Tick, Input* _Input, int
         if (narrationCount != _Tick->fixedUpdateCount)
         {
             // 나레이션 대화창 만들기
-            _Stage->SetColor(blue, blue);
+            _Stage->SetColor(lightblue, lightblue);
             _Input->Gotoxy(2, y - 2);
             wcout << "######################################################################################################################";
             _Input->Gotoxy(2, y + 2);
             wcout << "######################################################################################################################";
-            _Stage->SetColor(blue, black);
+            _Stage->SetColor(lightblue, black);
             
             // 나레이션 커서를 이동시키고 FixedUpdateCount가 1씩 증가할 때마다 출력이 되니 fixedUpdateCount의 수만큼 오른쪽으로 이동해서 단어 출력
 			_Input->Gotoxy(x + (_Tick->fixedUpdateCount * 2) - wcslen(_narration) - narrationLCount + narrationSettingLength / 2, y);
