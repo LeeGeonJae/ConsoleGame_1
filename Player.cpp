@@ -15,10 +15,12 @@ void Player::Init(int x, int y, Input* _Input)
 // 플레이어 그리기 (이전 위치 공백, 다음 위치 동그라미)
 void Player::DrawPlayer(Input* _Input)
 {
+	SetColor(15, 8);
 	_Input->Gotoxy(PlayerCurrentPosition.X, PlayerCurrentPosition.Y);
 	std::wcout << " ";
 	_Input->Gotoxy(PlayerNextPosition.X, PlayerNextPosition.Y);
-	std::wcout << "@";
+	std::wcout << L"■";
+	SetColor(15, 0);
 }
 
 // PlayerNextPosition이 '0'이면 이동, 아니면 가만히
@@ -158,6 +160,7 @@ bool Player::CanMoveWord(char map[][80], Input* _Input, Word* _Word)
 	if (map[PlayerNextPosition.Y + WordPosition.Y][PlayerNextPosition.X + WordPosition.X] != '0')
 		return false;
 
+	SetColor(14, 8);
 	// 맵에 플레이어의 다음 좌표를 빈 공간으로 바꾸고 " "으로 출력
 	map[PlayerNextPosition.Y][PlayerNextPosition.X] = '0';
 	_Input->Gotoxy(PlayerNextPosition.X, PlayerNextPosition.Y);
@@ -167,9 +170,18 @@ bool Player::CanMoveWord(char map[][80], Input* _Input, Word* _Word)
 	map[PlayerNextPosition.Y + WordPosition.Y][PlayerNextPosition.X + WordPosition.X] = temp;
 	_Input->Gotoxy((PlayerNextPosition.X + WordPosition.X), (PlayerNextPosition.Y + WordPosition.Y));
 	std::wcout << temp;
+	SetColor(15, 0);
 
 	// 문자가 이동하는데 성공했으면 마지막으로 그 줄에 있는 문자들을 체크하는 함수 실행
-	_Word->ChecktheWord(map, PlayerNextPosition.Y + WordPosition.Y);
+	_Word->ChecktheWord(map, PlayerNextPosition.Y + WordPosition.Y, PlayerNextPosition.X + WordPosition.X);
 
 	return true;
+}
+
+// 색 지정하기
+void Player::SetColor(int forground, int background)
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	int code = forground + background * 16;
+	SetConsoleTextAttribute(consoleHandle, code);
 }

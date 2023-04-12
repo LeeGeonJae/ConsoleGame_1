@@ -6,12 +6,12 @@ using namespace std;
 
 void Render::Init()
 {
-    _setmode(_fileno(stdout), _O_U16TEXT); // 유니코드 출력을 위한 설정
+    _setmode(_fileno(stdout), _O_U16TEXT);                                                                  // 유니코드 출력을 위한 설정
 }
 
 void Render::Update(Tick* _Tick, Input* _Input)
 {
-    if (GameNumber >= 0 && GameNumber < 10)
+    if (GameNumber >= 0 && GameNumber < 10)                                                                 // 게임 시작 시에 오른쪽에 키 설명
     {
         _Stage->SetColor(yellow, black);
         _Input->Gotoxy(90, 3);
@@ -29,8 +29,8 @@ void Render::Update(Tick* _Tick, Input* _Input)
 
     if (GameNumber == 0)                                                                                    // Menu
     {
-        _Stage->Menu(_Input);
         narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
+        _Stage->Menu(_Input);
         PrintCountsPerSecond(_Tick, _Input);
 
         if (_Input->IsSpaceCmdOn())                                                                         // Space bar를 누르면 해당 항목 선택
@@ -108,7 +108,7 @@ void Render::Update(Tick* _Tick, Input* _Input)
     }
     else if (GameNumber == 10)
     {
-        _Stage->GoodEnging(_Input, _Tick, &GameNumber, PlayTime);                                                      // 스테이지8으로 이동
+        _Stage->GoodEnging(_Input, _Tick, &GameNumber, PlayTime);                                           // 엔딩으로 이동
         narration(_Stage->narrationarr[narrationNext], _Tick, _Input, _Stage->Narrationarrlen);             // 나레이션 실행
         PrintCountsPerSecond(_Tick, _Input);
     }
@@ -134,25 +134,62 @@ void Render::Update(Tick* _Tick, Input* _Input)
         _Stage->GameOver(_Input, &GameNumber);
         _Stage->_word->GameNumber = 0;
     }
-    else if (GameNumber == 102)
+    else if (_Stage->_word->GameNumber == 102)                                                              // 이스터 에그를 찾았을 시에 살행
     {
+        GameNumber = 20;
+        for (int i = 0; i < 45; i++)                                                                        // 샌즈 그리기
+        {
+            for (int j = 0; j < 120; j++)
+            {
+                _Input->Gotoxy(j, i);
+                wcout << Senz3[i][j];
+            }
+            wcout << endl;
+        }
+        _Input->Gotoxy(0, 47);
+        _Stage->SetColor(lightblue, black);
+        wcout << L"        이런! 이스터 에그를 찾아냈구나? 축하의 의미로 스페이스 바를 누르면 게임을 클리어 할 수 있게 보내줄게!" << endl;
+        wcout << L"                  싫다고? 그러면 아무 방향의 화살표를 누르면 다시 메뉴 창으로 보내줄게!" << endl;
 
+        if (_Input->IsSpaceCmdOn())                                                                         // Space bar를 누르면 해당 항목 선택
+        {
+            _Input->Set(ESCAPE_KEY_INDEX, false);
+            _Stage->_word->GameNumber = 0;
+            _Stage->Once = false;
+            narrationReset = true;
+            GameNumber = 10;
+            system("cls");
+        }
+        else if (_Input->IsDownCmdOn() || _Input->IsLeftCmdOn() || _Input->IsRightCmdOn() || _Input->IsUpCmdOn())
+        {
+            _Input->Set(USER_CMD_LEFT, false);
+            _Input->Set(USER_CMD_DOWN, false);
+            _Input->Set(USER_CMD_RIGHT, false);
+            _Input->Set(USER_CMD_UP, false);
+            _Stage->Once = false;
+            narrationReset = true;
+            GameNumber = 0;
+            PlayTime = 0;
+            _Stage->_word->GameNumber = 0;
+            system("cls");
+        }
     }
 
-    
+
 }
 
 // 1초마다 실행되어 화면에 출력하는 함수 ( 테스트 용이라 필요하진 않음 )
 void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
 {
     static ULONGLONG elapsedTime = 1000;
-    static short senzX = 47;
+    static short senzX = 37;
     static short senzY = 19;
     static bool SenzFPS = true;
 
     elapsedTime += _Tick->GetDeltaTime();
     if (elapsedTime >= 1000)                // 0.1 초
     {
+        // 게임을 시작했을 때, PlayTime 화면에 출력
         if (GameNumber >= 1 && GameNumber != 10)
         {
             PlayTime += 1;
@@ -163,19 +200,20 @@ void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
         }
         else
         {
-            PlayTime = 0;
+            PlayTime = 0;                                   // 게임 도중이 아닐 시에 PlayTime 0으로 세팅
         }
 
+        // 나레이션의 캐릭터 샌즈 그려주기 ( 2 프레임 )
         if (SenzFPS)
         {
             SenzFPS = false;
             wchar_t tempSenz;
             for (int i = 0; i < 16; i++)
             {
-                for (int j = 0; j < 26; j++)
+                for (int j = 0; j < 46; j++)
                 {
                     _Input->Gotoxy(senzX + j, senzY + i);
-                    _Stage->SetColor(lightblue, black);
+                    _Stage->SetColor(black, lightgray);
                     tempSenz = Senz1[i][j];
                     wcout << tempSenz;
                     _Stage->SetColor(white, black);
@@ -187,10 +225,10 @@ void Render::PrintCountsPerSecond(Tick* _Tick, Input* _Input)
             SenzFPS = true;
             for (int i = 0; i < 16; i++)
             {
-                for (int j = 0; j < 26; j++)
+                for (int j = 0; j < 46; j++)
                 {
                     _Input->Gotoxy(senzX + j, senzY + i);
-					_Stage->SetColor(lightblue, black);
+					_Stage->SetColor(black, white);
                     wcout << Senz2[i][j];
                     _Stage->SetColor(white, black);
                 }

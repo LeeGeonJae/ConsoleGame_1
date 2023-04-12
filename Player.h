@@ -13,6 +13,7 @@ public:
 	void Move(char map[][80], Input* _Input, Tick* _Tick, Word* _Word);
 	bool CanMove(char map[][80], Input* _Input, Word* _Word);
 	bool CanMoveWord(char map[][80], Input* _Input, Word* _Word);
+	void SetColor(int forground, int background);
 
 public:
 	COORD PlayerCurrentPosition;

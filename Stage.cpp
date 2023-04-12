@@ -125,6 +125,7 @@ void Stage::GameOver(Input* _Input, int* GameNumber)
 	wcout << L"########################################################################################################################" << endl;
 	SetColor(white, black);
 
+	// 5초 후에 메뉴 창으로 이동
 	Sleep(5000);
 	system("cls");
 	Once = false;
@@ -305,21 +306,19 @@ void Stage::GoodEnging(Input* _Input, Tick* _Tick, int* GameNumber, int PlayTime
 	narrationarr[0] = L"축하해! 너는 게임을 클리어 했어!";
 	narrationarr[1] = L"스페이스 바를 누르면 게임이 종료될거야!";
 
-	if(Once == false)
-	{
-		_Input->Gotoxy(1, 1);
-		Once = true;
-		wcout << L"\n\n\n"; SetColor(lightgreen, black);
-		wcout << L"                                                       PlayTime : " << PlayTime << "\n\n\n"; SetColor(white, black);
-		wcout << L"                             ##    ##  #######  ##     ##    ##      ## #### ##    ## #### #### " << endl;
-		wcout << L"                              ##  ##  ##     ## ##     ##    ##  ##  ##  ##  ###   ## #### ####" << endl;
-		wcout << L"                               ####   ##     ## ##     ##    ##  ##  ##  ##  ####  ## #### ####" << endl;
-		wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ## ## ##  ##   ##" << endl;
-		wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ##  ####" << endl;
-		wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ##   ### #### ####" << endl;
-		wcout << L"                                ##     #######   #######      ###  ###  #### ##    ## #### ####" << endl;
-	}
+	_Input->Gotoxy(1, 1);
+	Once = true;
+	wcout << L"\n\n\n"; SetColor(lightgreen, black);
+	wcout << L"                                                       PlayTime : " << PlayTime << "\n\n\n"; SetColor(white, black);
+	wcout << L"                             ##    ##  #######  ##     ##    ##      ## #### ##    ## #### #### " << endl;
+	wcout << L"                              ##  ##  ##     ## ##     ##    ##  ##  ##  ##  ###   ## #### ####" << endl;
+	wcout << L"                               ####   ##     ## ##     ##    ##  ##  ##  ##  ####  ## #### ####" << endl;
+	wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ## ## ##  ##   ##" << endl;
+	wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ##  ####" << endl;
+	wcout << L"                                ##    ##     ## ##     ##    ##  ##  ##  ##  ##   ### #### ####" << endl;
+	wcout << L"                                ##     #######   #######      ###  ###  #### ##    ## #### ####" << endl;
 
+	// 게임 종료하기
 	if (_Input->IsSpaceCmdOn())
 		*GameNumber = -1;
 }
@@ -346,6 +345,8 @@ void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 			if (_Eremy->EremyCurrentPosition.X == w && _Eremy->EremyCurrentPosition.Y == h && _Eremy->Delete != true)
 				continue;
 
+			SetColor(white, darkgray);
+
 			// 해당 좌표에 가서 맵 그리기
 			_Input->Gotoxy(w, h);
 			char temp = Map[h][w];
@@ -363,53 +364,114 @@ void Stage::DrawMap(int x, int y, char Map[][80], Input* _Input)
 				wcout << "ㅁ";
 			else if (temp == 'r')				// RED
 			{
-				SetColor(red, black);
+				SetColor(red, darkgray);
 				wcout << "r";
 				SetColor(white, black);
 			}
 			else if (temp == 'b')				// BLUE
 			{
-				SetColor(lightblue, black);
+				SetColor(lightblue, darkgray);
 				wcout << "b";
 				SetColor(white, black);
 			}
 			else if (temp == 'y')				// YELLOW
 			{
-				SetColor(yellow, black);
+				SetColor(yellow, darkgray);
 				wcout << "y";
 				SetColor(white, black);
 			}
 			else if (temp == 'G')
-				wcout << "G";
+			{
+				SetColor(yellow, darkgray);
+				wcout << L"◎";
+				SetColor(white, black);
+			}
 			else if (temp == 'W')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "W";
+				SetColor(white, black);
+			}
 			else if (temp == 'A')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "A";
+				SetColor(white, black);
+			}
 			else if (temp == 'L')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "L";
+				SetColor(white, black);
+			}
 			else if (temp == 'O')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "O";
+				SetColor(white, black);
+			}
 			else if (temp == 'P')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "P";
+				SetColor(white, black);
+			}
 			else if (temp == 'E')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "E";
+				SetColor(white, black);
+			}
 			else if (temp == 'N')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "N";
+				SetColor(white, black);
+			}
 			else if (temp == 'C')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "C";
+				SetColor(white, black);
+			}
 			else if (temp == 'S')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "S";
+				SetColor(white, black);
+			}
 			else if (temp == 'B')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "B";
+				SetColor(white, black);
+			}
 			else if (temp == 'U')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "U";
+				SetColor(white, black);
+			}
 			else if (temp == 'R')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "R";
+				SetColor(white, black);
+			}
 			else if (temp == 'D')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "D";
+				SetColor(white, black);
+			}
 			else if (temp == 'Y')
+			{
+				SetColor(yellow, darkgray);
 				wcout << "Y";
+				SetColor(white, black);
+			}
 		}
+		SetColor(white, black);
 	}
 }
 

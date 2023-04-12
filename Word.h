@@ -10,7 +10,9 @@ public:
 	void Blue(char map[][80]);
 	void Red(char map[][80]);
 	void Yellow(char map[][80]);
-	void ChecktheWord(char map[][80], int y);
+	void NG();
+	void ChecktheWord(char map[][80], int y, int x);
+	void SetColor(int forground, int background);
 
 public:
 	bool DrawWordMap = false;
